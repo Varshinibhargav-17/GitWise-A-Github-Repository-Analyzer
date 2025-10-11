@@ -8,13 +8,15 @@ export default function SignupPage() {
 
   if (session) {
     return (
-      <div className="flex min-h-screen bg-gray-900 text-white items-center justify-center">
-        <div className="text-center p-6 bg-gray-800 rounded-lg shadow-lg">
-          <h2 className="text-3xl font-semibold mb-4">Welcome, {session.user?.name}</h2>
-          <p className="mb-2">Email: {session.user?.email}</p>
+      <div className="flex min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 items-center justify-center">
+        <div className="text-center p-8 bg-white rounded-2xl shadow-xl border border-gray-200 max-w-md">
+          <h2 className="text-3xl font-extrabold mb-4 bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent">
+            Welcome, {session.user?.name}
+          </h2>
+          <p className="text-gray-700 mb-2">Email: {session.user?.email}</p>
           <button
             onClick={() => signOut()}
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            className="mt-4 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-200"
           >
             Sign Out
           </button>
@@ -24,18 +26,17 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-900 text-white items-center justify-center">
-      <div className="bg-gray-800 p-10 rounded-xl shadow-lg w-96 flex flex-col items-center">
-        <h2 className="text-2xl font-semibold mb-6">Sign In with GitHub</h2>
-          <button
-            onClick={() => {
-              // Redirect in the same tab to allow NextAuth to handle the signin and redirect back to dashboard page
-              signIn("github", { callbackUrl: "/dashboard" });
-            }}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded w-full"
-          >
-            Continue with GitHub
-          </button>
+    <div className="flex min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 items-center justify-center">
+      <div className="bg-white p-10 rounded-2xl shadow-xl border border-gray-200 max-w-md w-full flex flex-col items-center">
+        <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent text-center">
+          Sign In with GitHub
+        </h2>
+        <button
+          onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
+          className="bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg w-full shadow-lg transition-transform duration-200 hover:-translate-y-0.5"
+        >
+          Continue with GitHub
+        </button>
       </div>
     </div>
   );
