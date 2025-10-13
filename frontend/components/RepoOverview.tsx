@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import {
   PieChart,
   Pie,
@@ -23,12 +24,45 @@ const COLORS = ["#6366f1", "#f59e0b", "#10b981", "#ef4444"];
 
 export default function RepoOverview({ repoData }: { repoData: any }) {
   const [activeTab, setActiveTab] = useState("Overview");
+  const { data: session } = useSession();
 
   const repo = repoData.repo;
   const languages = repoData.languages;
   const commits = repoData.commits;
   const codeMetrics = repoData.codeMetrics;
   const activity = repoData.activity; // expects backend to return activity data
+
+  const handleSaveToDashboard = async (data: any) => {
+    if (!session?.user?.email) {
+      alert("Please sign in to save to dashboard");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/save-analysis", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userEmail: session.user.email,
+          repoData: data,
+          repoUrl: `${repo.owner}/${repo.name}`,
+        }),
+      });
+
+      if (res.ok) {
+        alert("Analysis saved to dashboard!");
+        // Refresh saved analyses in dashboard if we're on that page
+        if (window.location.pathname === "/dashboard") {
+          window.location.reload();
+        }
+      } else {
+        alert("Failed to save analysis");
+      }
+    } catch (error) {
+      console.error("Error saving analysis:", error);
+      alert("Error saving analysis");
+    }
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -63,7 +97,10 @@ export default function RepoOverview({ repoData }: { repoData: any }) {
           </div>
           <p className="text-sm text-gray-500">Health Score</p>
         </div>
-        <button className="px-4 py-2 bg-yellow-400 rounded-xl shadow hover:bg-yellow-500 transition-all duration-200">
+        <button
+          onClick={() => handleSaveToDashboard(repoData)}
+          className="px-4 py-2 bg-yellow-400 rounded-xl shadow hover:bg-yellow-500 transition-all duration-200"
+        >
           ⭐ Save to Dashboard
         </button>
       </div>
