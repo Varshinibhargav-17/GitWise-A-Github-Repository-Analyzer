@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -48,18 +49,18 @@ export default function ContactPage() {
 
           {/* Navigation */}
           <nav className="flex space-x-8 text-gray-700 font-medium">
-            <a href="/" className="hover:text-black transition-colors duration-200 relative group">
+            <Link href="/" className="hover:text-black transition-colors duration-200 relative group">
               Home
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-200 group-hover:w-full"></span>
-            </a>
-            <a href="/about" className="hover:text-black transition-colors duration-200 relative group">
+            </Link>
+            <Link href="/about" className="hover:text-black transition-colors duration-200 relative group">
               About
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-200 group-hover:w-full"></span>
-            </a>
-            <a href="/contact" className="text-black relative">
+            </Link>
+            <Link href="/contact" className="text-black relative">
               Contact
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-black"></span>
-            </a>
+            </Link>
           </nav>
         </div>
       </header>

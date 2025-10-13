@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
@@ -18,18 +20,18 @@ export default function AboutPage() {
 
           {/* Right - Navigation */}
           <nav className="flex space-x-8 text-gray-700 font-medium">
-            <a href="/" className="hover:text-black transition-colors duration-200 relative group">
+            <Link href="/" className="hover:text-black transition-colors duration-200 relative group">
               Home
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-200 group-hover:w-full"></span>
-            </a>
-            <a href="/about" className="text-black relative">
+            </Link>
+            <Link href="/about" className="text-black relative">
               About
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-black"></span>
-            </a>
-            <a href="/contact" className="hover:text-black transition-colors duration-200 relative group">
+            </Link>
+            <Link href="/contact" className="hover:text-black transition-colors duration-200 relative group">
               Contact
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-200 group-hover:w-full"></span>
-            </a>
+            </Link>
           </nav>
         </div>
       </header>
@@ -184,7 +186,7 @@ export default function AboutPage() {
           <p className="text-xl text-gray-300 mb-8">
             Join thousands of developers who trust Gitwise for repository insights.
           </p>
-          <a
+          <Link
             href="/signup"
             className="inline-flex items-center space-x-2 px-8 py-4 bg-white text-gray-900 font-semibold rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5 transition-all duration-200"
           >
@@ -192,7 +194,7 @@ export default function AboutPage() {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
-          </a>
+          </Link>
         </div>
       </section>
 

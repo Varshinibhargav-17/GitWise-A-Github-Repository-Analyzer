@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Home() {
   const router = useRouter();
@@ -24,18 +25,18 @@ export default function Home() {
 
           {/* Right - Navigation */}
           <nav className="flex space-x-8 text-gray-700 font-medium">
-            <a href="/" className="hover:text-black transition-colors duration-200 relative group">
+            <Link href="/" className="hover:text-black transition-colors duration-200 relative group">
               Home
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-200 group-hover:w-full"></span>
-            </a>
-            <a href="/about" className="hover:text-black transition-colors duration-200 relative group">
+            </Link>
+            <Link href="/about" className="hover:text-black transition-colors duration-200 relative group">
               About
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-200 group-hover:w-full"></span>
-            </a>
-            <a href="/contact" className="hover:text-black transition-colors duration-200 relative group">
+            </Link>
+            <Link href="/contact" className="hover:text-black transition-colors duration-200 relative group">
               Contact
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-200 group-hover:w-full"></span>
-            </a>
+            </Link>
           </nav>
         </div>
       </header>

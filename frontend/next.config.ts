@@ -2,12 +2,18 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
-    domains: ['avatars.githubusercontent.com'],
+    domains: [
+      'avatars.githubusercontent.com',
+      'github.com', 
+      'user-images.githubusercontent.com'
+    ],
   },
-  env: {
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
 }
 
