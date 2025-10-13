@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: [
       'avatars.githubusercontent.com',
-      'github.com', 
+      'github.com',
       'user-images.githubusercontent.com'
     ],
   },
@@ -14,6 +14,9 @@ const nextConfig: NextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true,
+  },
+  experimental: {
+    serverComponentsExternalPackages: ['mongoose'],
   },
 }
 
