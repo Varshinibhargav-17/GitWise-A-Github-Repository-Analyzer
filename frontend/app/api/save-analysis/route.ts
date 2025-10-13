@@ -6,11 +6,14 @@ export async function POST(req: NextRequest) {
   try {
     console.log("POST /api/save-analysis called");
 
-    const { userEmail, repoData, repoUrl } = await req.json();
-    console.log("Request data:", { userEmail, repoUrl });
+    const body = await req.json();
+    console.log("Raw request body received");
+
+    const { userEmail, repoData, repoUrl } = body;
+    console.log("Parsed request data:", { userEmail: userEmail ? "present" : "missing", repoUrl: repoUrl ? "present" : "missing", repoData: repoData ? "present" : "missing" });
 
     if (!userEmail || !repoData || !repoUrl) {
-      console.log("Missing required fields");
+      console.log("Missing required fields:", { userEmail, repoUrl, hasRepoData: !!repoData });
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
@@ -18,18 +21,24 @@ export async function POST(req: NextRequest) {
     await connectDB();
     console.log("Connected to DB successfully");
 
+    console.log("Attempting to save analysis...");
     // Try to save the analysis, will fail if duplicate exists due to unique index
     const savedAnalysis = await SavedAnalysis.findOneAndUpdate(
       { userEmail, repoUrl },
       { repoData, savedAt: new Date() },
       { upsert: true, new: true }
     );
-    console.log("Analysis saved:", savedAnalysis);
+    console.log("Analysis saved successfully:", savedAnalysis._id);
 
     return NextResponse.json({ message: "Analysis saved successfully", savedAnalysis });
   } catch (error) {
     console.error("Error saving analysis:", error);
-    return NextResponse.json({ error: "Failed to save analysis", details: (error as Error).message }, { status: 500 });
+    console.error("Error stack:", (error as Error).stack);
+    return NextResponse.json({
+      error: "Failed to save analysis",
+      details: (error as Error).message,
+      type: (error as Error).name
+    }, { status: 500 });
   }
 }
 
