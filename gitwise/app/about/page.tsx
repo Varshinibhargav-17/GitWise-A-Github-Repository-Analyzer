@@ -156,7 +156,7 @@ export default function AboutPage() {
               <div className="text-4xl mb-4">🚀</div>
               <h4 className="text-lg font-semibold text-gray-900 mb-2">Innovation</h4>
               <p className="text-gray-600 text-sm">
-                Constantly evolving with cutting-edge analytics and AI-powered insights.
+                Constantly evolving with cutting-edge analytics and data-driven insights.
               </p>
             </div>
             
